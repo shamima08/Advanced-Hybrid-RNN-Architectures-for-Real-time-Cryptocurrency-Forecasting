@@ -32,8 +32,8 @@ crypto_data = {}
 for ticker in cryptos:
     crypto_data[ticker] = yf.download(ticker, start=start_date, end=end_date)
     
-  ``  
-    ### BTC
+  ```
+### BTC
     ```
     
 
@@ -252,7 +252,7 @@ print(f'LSTM-GRU RMSE: {lstm_gru_rmse:.3f}, MAPE: {lstm_gru_mape:.2f}%')
 print(f'GRU-BiLSTM RMSE: {gru_bilstm_rmse:.3f}, MAPE: {gru_bilstm_mape:.2f}%')
 print(f'LSTM-BiLSTM RMSE: {lstm_bilstm_rmse:.3f}, MAPE: {lstm_bilstm_mape:.2f}%')
 ```
-
+```
 ### ETH
 ```
 
@@ -467,6 +467,7 @@ print(f'LSTM-GRU RMSE: {lstm_gru_rmse:.3f}, MAPE: {lstm_gru_mape:.2f}%')
 print(f'GRU-BiLSTM RMSE: {gru_bilstm_rmse:.3f}, MAPE: {gru_bilstm_mape:.2f}%')
 print(f'LSTM-BiLSTM RMSE: {lstm_bilstm_rmse:.3f}, MAPE: {lstm_bilstm_mape:.2f}%')
 ```
+
 ###LTC
 ```
 
