@@ -1,5 +1,6 @@
 # Advanced-Hybrid-RNN-Architectures-for-Real-time-Cryptocurrency-Forecasting
-Advanced Hybrid RNN Architectures for Real-time Cryptocurrency Forecasting and Strategic Trading Optimization
+```
+CODE for this project:
 
 !pip install yfinance numpy pandas matplotlib scikit-learn tensorflow
 import yfinance as yf
@@ -17,6 +18,7 @@ from tensorflow.keras.layers import LSTM, GRU, Bidirectional, Dense
 
 
 # Set seeds for reproducibility
+```
 random.seed(42)
 np.random.seed(42)
 tf.random.set_seed(42)
