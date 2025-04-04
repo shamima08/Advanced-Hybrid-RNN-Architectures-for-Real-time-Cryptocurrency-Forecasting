@@ -34,6 +34,7 @@ for ticker in cryptos:
     
     
     ### BTC
+    ```
     
 
 btc_data = crypto_data['BTC-USD']
@@ -96,6 +97,7 @@ print('LSTM-BiLSTM Test loss:', lstm_bilstm_scores)
 plt.figure(figsize=(18, 5))
 
 # LSTM-GRU
+```
 plt.subplot(1, 3, 1)
 plt.plot(lstm_gru_history.history['loss'], label='LSTM-GRU training Loss')
 plt.plot(lstm_gru_history.history['val_loss'], label='LSTM-GRU Validation Loss')
@@ -105,6 +107,7 @@ plt.ylabel('Loss')
 plt.legend()
 
 # GRU-BiLSTM
+```
 plt.subplot(1, 3, 2)
 plt.plot(gru_bilstm_history.history['loss'], label='GRU-BiLSTM training Loss')
 plt.plot(gru_bilstm_history.history['val_loss'], label='GRU-BiLSTM Validation Loss')
@@ -114,6 +117,7 @@ plt.ylabel('Loss')
 plt.legend()
 
 # LSTM-BiLSTM
+```
 plt.subplot(1, 3, 3)
 plt.plot(lstm_bilstm_history.history['loss'], label='LSTM-BiLSTM training Loss')
 plt.plot(lstm_bilstm_history.history['val_loss'], label='LSTM-BiLSTM Validation Loss')
@@ -131,9 +135,11 @@ lstm_bilstm_predictions = lstm_bilstm_model.predict(X_test_btc)
 
 
 # Generate date range for x-axis
+```
 date_range = pd.date_range(start=start_date, end=end_date, periods=len(Y_test_btc))
 
 # Plot actual vs. predicted prices for the LSTM-GRU model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_btc), scaled_data_btc.shape[1]-1)), Y_test_btc.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='darkorange')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(lstm_gru_predictions), scaled_data_btc.shape[1]-1)), lstm_gru_predictions), axis=1))[:, -1], label='Predicted Prices', color='limegreen')
@@ -146,10 +152,12 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('btc-lstm-gru.png')
 plt.show()
 
 # Plot actual vs. predicted prices for the GRU-BiLSTM model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_btc), scaled_data_btc.shape[1]-1)), Y_test_btc.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='darkorange')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(gru_bilstm_predictions), scaled_data_btc.shape[1]-1)), gru_bilstm_predictions), axis=1))[:, -1], label='Predicted Prices', color='limegreen')
@@ -162,10 +170,12 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('btc-gru-bilstm.png')
 plt.show()
 
 # Plot actual vs. predicted prices for the LSTM-BiLSTM model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_btc), scaled_data_btc.shape[1]-1)), Y_test_btc.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='darkorange')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(lstm_bilstm_predictions), scaled_data_btc.shape[1]-1)), lstm_bilstm_predictions), axis=1))[:, -1], label='Predicted Prices', color='limegreen')
@@ -178,30 +188,36 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('btc-lstm-bilstm.png')
 plt.show()
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 # Make predictions
+```
 lstm_gru_predictions = lstm_gru_model.predict(X_test_btc)
 gru_bilstm_predictions = gru_bilstm_model.predict(X_test_btc)
 lstm_bilstm_predictions = lstm_bilstm_model.predict(X_test_btc)
 
 
 # Calculate MSE and MAE for LSTM-GRU
+```
 lstm_gru_mse = mean_squared_error(Y_test_btc, lstm_gru_predictions)
 lstm_gru_mae = mean_absolute_error(Y_test_btc, lstm_gru_predictions)
 
 # Calculate MSE and MAE for GRU-BiLSTM
+```
 gru_bilstm_mse = mean_squared_error(Y_test_btc, gru_bilstm_predictions)
 gru_bilstm_mae = mean_absolute_error(Y_test_btc, gru_bilstm_predictions)
 
 # Calculate MSE and MAE for LSTM-BiLSTM
+```
 lstm_bilstm_mse = mean_squared_error(Y_test_btc, lstm_bilstm_predictions)
 lstm_bilstm_mae = mean_absolute_error(Y_test_btc, lstm_bilstm_predictions)
 
 # Print the scores
+```
 print(f'LSTM-GRU MSE: {lstm_gru_mse}, MAE: {lstm_gru_mae}')
 print(f'GRU-BiLSTM MSE: {gru_bilstm_mse}, MAE: {gru_bilstm_mae}')
 print(f'LSTM-BiLSTM MSE: {lstm_bilstm_mse}, MAE: {lstm_bilstm_mae}')
@@ -223,6 +239,7 @@ def calculate_mape(actuals, predictions):
 
 
 # Calculate RMSE and MAPE
+```
 lstm_gru_rmse = calculate_rmse(Y_test_btc, lstm_gru_predictions.flatten())
 gru_bilstm_rmse = calculate_rmse(Y_test_btc, gru_bilstm_predictions.flatten())
 lstm_bilstm_rmse = calculate_rmse(Y_test_btc, lstm_bilstm_predictions.flatten())
@@ -237,6 +254,7 @@ print(f'LSTM-BiLSTM RMSE: {lstm_bilstm_rmse:.3f}, MAPE: {lstm_bilstm_mape:.2f}%'
 
 
 ### ETH
+```
 
 eth_data = crypto_data['ETH-USD']
 eth_data.fillna(method='ffill', inplace=True)
@@ -296,6 +314,7 @@ print('LSTM-BiLSTM Test loss:', lstm_bilstm_scores)
 plt.figure(figsize=(18, 5))
 
 # LSTM-GRU
+```
 plt.subplot(1, 3, 1)
 plt.plot(lstm_gru_history.history['loss'], label='LSTM-GRU training Loss')
 plt.plot(lstm_gru_history.history['val_loss'], label='LSTM-GRU Validation Loss')
@@ -305,6 +324,7 @@ plt.ylabel('Loss')
 plt.legend()
 
 # GRU-BiLSTM
+```
 plt.subplot(1, 3, 2)
 plt.plot(gru_bilstm_history.history['loss'], label='GRU-BiLSTM training Loss')
 plt.plot(gru_bilstm_history.history['val_loss'], label='GRU-BiLSTM Validation Loss')
@@ -314,6 +334,7 @@ plt.ylabel('Loss')
 plt.legend()
 
 # LSTM-BiLSTM
+```
 plt.subplot(1, 3, 3)
 plt.plot(lstm_bilstm_history.history['loss'], label='LSTM-BiLSTM training Loss')
 plt.plot(lstm_bilstm_history.history['val_loss'], label='LSTM-BiLSTM Validation Loss')
@@ -330,9 +351,11 @@ gru_bilstm_predictions = gru_bilstm_model.predict(X_test_eth)
 lstm_bilstm_predictions = lstm_bilstm_model.predict(X_test_eth)
 
 # Generate date range for x-axis
+```
 date_range = pd.date_range(start=start_date, end=end_date, periods=len(Y_test_eth))
 
 # Plot actual vs. predicted prices for the LSTM-GRU model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_eth), scaled_data_eth.shape[1]-1)), Y_test_eth.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='crimson')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(lstm_gru_predictions), scaled_data_eth.shape[1]-1)), lstm_gru_predictions), axis=1))[:, -1], label='Predicted Prices', color='cyan')
@@ -345,10 +368,12 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('eth-lstm-gru.png')
 plt.show()
 
 # Plot actual vs. predicted prices for the GRU-BiLSTM model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_eth), scaled_data_eth.shape[1]-1)), Y_test_eth.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='crimson')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(gru_bilstm_predictions), scaled_data_eth.shape[1]-1)), gru_bilstm_predictions), axis=1))[:, -1], label='Predicted Prices', color='cyan')
@@ -361,10 +386,12 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('eth-gru-bilstm.png')
 plt.show()
 
 # Plot actual vs. predicted prices for the LSTM-BiLSTM model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_eth), scaled_data_eth.shape[1]-1)), Y_test_eth.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='crimson')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(lstm_bilstm_predictions), scaled_data_eth.shape[1]-1)), lstm_bilstm_predictions), axis=1))[:, -1], label='Predicted Prices', color='cyan')
@@ -377,29 +404,35 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('eth-lstm-bilstm.png')
 plt.show()
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 # Make predictions
+```
 lstm_gru_predictions = lstm_gru_model.predict(X_test_eth)
 gru_bilstm_predictions = gru_bilstm_model.predict(X_test_eth)
 lstm_bilstm_predictions = lstm_bilstm_model.predict(X_test_eth)
 
 # Calculate MSE and MAE for LSTM-GRU
+```
 lstm_gru_mse = mean_squared_error(Y_test_eth, lstm_gru_predictions)
 lstm_gru_mae = mean_absolute_error(Y_test_eth, lstm_gru_predictions)
 
 # Calculate MSE and MAE for GRU-BiLSTM
+```
 gru_bilstm_mse = mean_squared_error(Y_test_eth, gru_bilstm_predictions)
 gru_bilstm_mae = mean_absolute_error(Y_test_eth, gru_bilstm_predictions)
 
 # Calculate MSE and MAE for LSTM-BiLSTM
+```
 lstm_bilstm_mse = mean_squared_error(Y_test_eth, lstm_bilstm_predictions)
 lstm_bilstm_mae = mean_absolute_error(Y_test_eth, lstm_bilstm_predictions)
 
 # Print the scores
+```
 print(f'LSTM-GRU MSE: {lstm_gru_mse}, MAE: {lstm_gru_mae}')
 print(f'GRU-BiLSTM MSE: {gru_bilstm_mse}, MAE: {gru_bilstm_mae}')
 print(f'LSTM-BiLSTM MSE: {lstm_bilstm_mse}, MAE: {lstm_bilstm_mae}')
@@ -421,6 +454,7 @@ def calculate_mape(actuals, predictions):
 
 
 # Calculate RMSE and MAPE
+```
 lstm_gru_rmse = calculate_rmse(Y_test_eth, lstm_gru_predictions.flatten())
 gru_bilstm_rmse = calculate_rmse(Y_test_eth, gru_bilstm_predictions.flatten())
 lstm_bilstm_rmse = calculate_rmse(Y_test_eth, lstm_bilstm_predictions.flatten())
@@ -434,6 +468,7 @@ print(f'GRU-BiLSTM RMSE: {gru_bilstm_rmse:.3f}, MAPE: {gru_bilstm_mape:.2f}%')
 print(f'LSTM-BiLSTM RMSE: {lstm_bilstm_rmse:.3f}, MAPE: {lstm_bilstm_mape:.2f}%')
 
 ###LTC
+```
 
 
 ltc_data = crypto_data['LTC-USD']
@@ -494,6 +529,7 @@ print('LSTM-BiLSTM Test loss:', lstm_bilstm_scores)
 plt.figure(figsize=(18, 5))
 
 # LSTM-GRU
+```
 plt.subplot(1, 3, 1)
 plt.plot(lstm_gru_history.history['loss'], label='LSTM-GRU training Loss')
 plt.plot(lstm_gru_history.history['val_loss'], label='LSTM-GRU Validation Loss')
@@ -503,6 +539,7 @@ plt.ylabel('Loss')
 plt.legend()
 
 # GRU-BiLSTM
+```
 plt.subplot(1, 3, 2)
 plt.plot(gru_bilstm_history.history['loss'], label='GRU-BiLSTM training Loss')
 plt.plot(gru_bilstm_history.history['val_loss'], label='GRU-BiLSTM Validation Loss')
@@ -512,6 +549,7 @@ plt.ylabel('Loss')
 plt.legend()
 
 # LSTM-BiLSTM
+```
 plt.subplot(1, 3, 3)
 plt.plot(lstm_bilstm_history.history['loss'], label='LSTM-BiLSTM training Loss')
 plt.plot(lstm_bilstm_history.history['val_loss'], label='LSTM-BiLSTM Validation Loss')
@@ -528,9 +566,11 @@ gru_bilstm_predictions = gru_bilstm_model.predict(X_test_ltc)
 lstm_bilstm_predictions = lstm_bilstm_model.predict(X_test_ltc)
 
 # Generate date range for x-axis
+```
 date_range = pd.date_range(start=start_date, end=end_date, periods=len(Y_test_ltc))
 
 # Plot actual vs. predicted prices for the LSTM-GRU model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_ltc), scaled_data_ltc.shape[1]-1)), Y_test_ltc.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='magenta')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(lstm_gru_predictions), scaled_data_ltc.shape[1]-1)), lstm_gru_predictions), axis=1))[:, -1], label='Predicted Prices', color='deepskyblue')
@@ -543,10 +583,12 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('ltc-lstm-gru.png')
 plt.show()
 
 # Plot actual vs. predicted prices for the GRU-BiLSTM model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_ltc), scaled_data_ltc.shape[1]-1)), Y_test_ltc.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='magenta')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(gru_bilstm_predictions), scaled_data_ltc.shape[1]-1)), gru_bilstm_predictions), axis=1))[:, -1], label='Predicted Prices', color='deepskyblue')
@@ -559,10 +601,12 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('ltc-gru-bilstm.png')
 plt.show()
 
 # Plot actual vs. predicted prices for the LSTM-BiLSTM model
+```
 plt.figure(figsize=(10, 6))
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(Y_test_ltc), scaled_data_ltc.shape[1]-1)), Y_test_ltc.reshape(-1, 1)), axis=1))[:, -1], label='Actual Prices', color='magenta')
 plt.plot(date_range, scaler.inverse_transform(np.concatenate((np.zeros((len(lstm_bilstm_predictions), scaled_data_ltc.shape[1]-1)), lstm_bilstm_predictions), axis=1))[:, -1], label='Predicted Prices', color='deepskyblue')
@@ -575,29 +619,35 @@ plt.legend()
 plt.grid(True)
 
 # Save the plot to the current directory
+```
 plt.savefig('ltc-lstm-bilstm.png')
 plt.show()
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 # Make predictions
+```
 lstm_gru_predictions = lstm_gru_model.predict(X_test_ltc)
 gru_bilstm_predictions = gru_bilstm_model.predict(X_test_ltc)
 lstm_bilstm_predictions = lstm_bilstm_model.predict(X_test_ltc)
 
 # Calculate MSE and MAE for LSTM-GRU
+```
 lstm_gru_mse = mean_squared_error(Y_test_ltc, lstm_gru_predictions)
 lstm_gru_mae = mean_absolute_error(Y_test_ltc, lstm_gru_predictions)
 
 # Calculate MSE and MAE for GRU-BiLSTM
+```
 gru_bilstm_mse = mean_squared_error(Y_test_ltc, gru_bilstm_predictions)
 gru_bilstm_mae = mean_absolute_error(Y_test_ltc, gru_bilstm_predictions)
 
 # Calculate MSE and MAE for LSTM-BiLSTM
+```
 lstm_bilstm_mse = mean_squared_error(Y_test_ltc, lstm_bilstm_predictions)
 lstm_bilstm_mae = mean_absolute_error(Y_test_ltc, lstm_bilstm_predictions)
 
 # Print the scores
+```
 print(f'LSTM-GRU MSE: {lstm_gru_mse}, MAE: {lstm_gru_mae}')
 print(f'GRU-BiLSTM MSE: {gru_bilstm_mse}, MAE: {gru_bilstm_mae}')
 print(f'LSTM-BiLSTM MSE: {lstm_bilstm_mse}, MAE: {lstm_bilstm_mae}')
@@ -619,6 +669,7 @@ def calculate_mape(actuals, predictions):
 
 
 # Calculate RMSE and MAPE
+```
 lstm_gru_rmse = calculate_rmse(Y_test_ltc, lstm_gru_predictions.flatten())
 gru_bilstm_rmse = calculate_rmse(Y_test_ltc, gru_bilstm_predictions.flatten())
 lstm_bilstm_rmse = calculate_rmse(Y_test_ltc, lstm_bilstm_predictions.flatten())
