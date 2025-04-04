@@ -34,7 +34,7 @@ for ticker in cryptos:
     
   ```
 ### BTC
-    ```
+```
     
 
 btc_data = crypto_data['BTC-USD']
